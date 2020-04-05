@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns="http://tizen.org/ns/packages" api-version="4" package="org.tizen.example.PoolController.Tizen.Forms.Wearable" version="1.0.0">
+	<profile name="wearable" />
+	<ui-application appid="org.tizen.example.PoolController.Tizen.Forms.Wearable"
+					exec="PoolController.Tizen.Forms.Wearable.dll"
+					type="dotnet"
+					multiple="false"
+					taskmanage="true"
+					nodisplay="false"
+					launch_mode="single">
+  <label>PoolController.Tizen.Forms.Wearable</label>
+	<icon>PoolController.Tizen.Forms.Wearable.png</icon>
+        <metadata key="http://tizen.org/metadata/prefer_dotnet_aot" value="true" />
+	</ui-application>
+</manifest>
