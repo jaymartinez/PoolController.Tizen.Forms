@@ -8,4 +8,10 @@
     <PackageReference Include="Xamarin.Forms" Version="3.2.0.871581" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="eHub.Common">
+      <HintPath>..\..\..\..\eHub.Common\eHub.Service\bin\Release\netstandard2.0\eHub.Common.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

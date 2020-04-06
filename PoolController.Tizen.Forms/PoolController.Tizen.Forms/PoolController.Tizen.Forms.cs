@@ -1,3 +1,6 @@
+using eHub.Common.Api;
+using eHub.Common.Models;
+using eHub.Common.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +14,12 @@ namespace PoolController.Tizen.Forms
     {
         public App()
         {
+            Initialize();
+
+            //Configuration config = new Configuration()
+            //WebInterface webApi = new WebInterface();
+            //PoolApi api = new PoolApi();
+            //PoolService ps = new PoolService();
             // The root page of your application
             MainPage = new ContentPage
             {
@@ -18,9 +27,18 @@ namespace PoolController.Tizen.Forms
                 {
                     VerticalOptions = LayoutOptions.Center,
                     Children = {
-                        new Label {
+                        new Label
+                        {
                             HorizontalTextAlignment = TextAlignment.Center,
-                            Text = "Welcome to Xamarin Forms!"
+                            Text = "Tizen Xamarin!!!"
+                        },
+                        new Button
+                        {
+                            Text = "Click Me",
+                            Command = new Command(() =>
+                            {
+                                Console.WriteLine("Button Tapped!");
+                            })
                         }
                     }
                 }
@@ -40,6 +58,11 @@ namespace PoolController.Tizen.Forms
         protected override void OnResume()
         {
             // Handle when your app resumes
+        }
+
+        void Initialize()
+        {
+
         }
     }
 }
