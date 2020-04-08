@@ -13,7 +13,9 @@ namespace PoolController.Tizen.Forms.Views
             var items = new List<HomeCellItem>
             {
                 new HomeCellItem(CellType.Pool),
+                new HomeCellItem(CellType.PoolLight),
                 new HomeCellItem(CellType.Spa),
+                new HomeCellItem(CellType.SpaLight),
                 new HomeCellItem(CellType.Booster),
                 new HomeCellItem(CellType.Heater),
                 new HomeCellItem(CellType.GroundLights)

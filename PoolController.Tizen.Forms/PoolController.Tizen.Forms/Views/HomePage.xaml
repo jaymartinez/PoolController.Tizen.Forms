@@ -9,7 +9,7 @@
                     <DataTemplate>
                         <ViewCell>
                             <StackLayout HorizontalOptions="Fill">
-                                <Button Clicked="Button_Clicked" Text="{Binding Name}" />
+                                <Button Command="{Binding ButtonTapCommand}" Text="{Binding Name}" />
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>

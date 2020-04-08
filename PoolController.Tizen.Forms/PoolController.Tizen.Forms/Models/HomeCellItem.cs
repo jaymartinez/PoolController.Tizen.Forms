@@ -6,83 +6,35 @@ namespace PoolController.Tizen.Forms.Models
 {
     public class HomeCellItem
     {
-        public ScheduleCellItem ScheduleCellItem { get; set; }
-        public PoolCellItem PoolItem { get; set; }
-        public SpaCellItem SpaItem { get; set; }
-        public CellType CellTypeObj { get; }
-        public PiPin SingleSwitchItem { get; }
+        public CellType CellType { get; }
+        public string Name { get => CellType.ToString(); }
 
-        public Action AboutTapped { get; set; }
+        public Command<HomeCellItem> ButtonTapCommand => 
+            new Command<HomeCellItem>(item =>
+            {
+                switch (item.CellType)
+                {
+                    case CellType.Pool:
+                        break;
+                    case CellType.Spa:
+                        break;
+                    case CellType.Booster:
+                        break;
+                    case CellType.Heater:
+                        break;
+                    case CellType.GroundLights:
+                        break;
+                    case CellType.PoolLight:
+                        break;
+                    case CellType.SpaLight:
+                        break;
+                }
+            });
 
-        public string Name
-        {
-            get => CellTypeObj.ToString();
-        }
 
         public HomeCellItem(CellType cellType)
         {
-            CellTypeObj = cellType;
-        }
-
-        public HomeCellItem(ScheduleCellItem scheduleItem, CellType cellType)
-        {
-            ScheduleCellItem = scheduleItem;
-            CellTypeObj = cellType;
-        }
-
-        public HomeCellItem(PoolCellItem poolItem, CellType cellType)
-        {
-            PoolItem = poolItem;
-            CellTypeObj = cellType;
-        }
-
-        public HomeCellItem(SpaCellItem spaItem, CellType cellType)
-        {
-            SpaItem = spaItem;
-            CellTypeObj = cellType;
-        }
-
-        public HomeCellItem(PiPin piPin, CellType cellType)
-        {
-            SingleSwitchItem = piPin;
-            CellTypeObj = cellType;
-        }
-    }
-
-    public class ScheduleCellItem
-    {
-        public PoolSchedule Schedule { get; }
-        public Action<Button> StartTapped { get; set; }
-        public Action<Button> EndTapped { get; set; }
-        public Action<Switch> EnabledCheckboxTapped { get; set; }
-
-        public ScheduleCellItem(PoolSchedule schedule)
-        {
-            Schedule = schedule;
-        }
-    }
-
-    public class SpaCellItem
-    {
-        public PiPin SpaPump { get; }
-        public PiPin SpaLight { get; }
-
-        public SpaCellItem(PiPin spaPump, PiPin spaLight)
-        {
-            SpaPump = spaPump;
-            SpaLight = spaLight;
-        }
-    }
-
-    public class PoolCellItem
-    {
-        public PiPin PoolPump { get; }
-        public PiPin PoolLight { get; }
-
-        public PoolCellItem(PiPin poolPump, PiPin poolLight)
-        {
-            PoolPump = poolPump;
-            PoolLight = poolLight;
+            CellType = cellType;
         }
     }
 
@@ -94,6 +46,8 @@ namespace PoolController.Tizen.Forms.Models
         Booster,
         Heater,
         GroundLights,
+        SpaLight,
+        PoolLight,
         About
     }
 }
