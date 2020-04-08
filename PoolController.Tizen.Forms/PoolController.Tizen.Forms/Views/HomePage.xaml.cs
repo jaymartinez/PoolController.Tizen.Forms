@@ -1,12 +1,6 @@
 ﻿using PoolController.Tizen.Forms.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace PoolController.Tizen.Forms.Views
 {
@@ -16,16 +10,26 @@ namespace PoolController.Tizen.Forms.Views
 		{
             InitializeComponent();
 
-            HomeItemsListview.ItemsSource = new List<HomeCellItem>
+            var items = new List<HomeCellItem>
             {
-                new HomeCellItem(CellType.Pool)
+                new HomeCellItem(CellType.Pool),
+                new HomeCellItem(CellType.Spa),
+                new HomeCellItem(CellType.Booster),
+                new HomeCellItem(CellType.Heater),
+                new HomeCellItem(CellType.GroundLights)
             };
 
+            HomeItemsListview.ItemsSource = items;
         }
 
         public void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
 
         }
-	}
+
+        private void Button_Clicked(object sender, System.EventArgs e)
+        {
+
+        }
+    }
 }
