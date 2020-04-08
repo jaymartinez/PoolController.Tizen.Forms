@@ -9,9 +9,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="eHub.Common">
-      <HintPath>..\..\..\..\eHub.Common\eHub.Service\bin\Release\netstandard2.0\eHub.Common.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\..\..\..\eHub.Common\eHub.Service\eHub.Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Views\HomePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>
