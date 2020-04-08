@@ -1,5 +1,6 @@
 ﻿using eHub.Common.Models;
 using System;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace PoolController.Tizen.Forms.Models
@@ -8,32 +9,35 @@ namespace PoolController.Tizen.Forms.Models
     {
         public CellType CellType { get; }
         public string Name { get => CellType.ToString(); }
+        public ICommand ButtonTapCommand { get; private set; }
 
-        public Command<HomeCellItem> ButtonTapCommand => 
-            new Command<HomeCellItem>(item =>
+        public HomeCellItem(CellType cellType)
+        {
+            ButtonTapCommand = new Command(item =>
             {
-                switch (item.CellType)
+                if (item is HomeCellItem i)
                 {
-                    case CellType.Pool:
-                        break;
-                    case CellType.Spa:
-                        break;
-                    case CellType.Booster:
-                        break;
-                    case CellType.Heater:
-                        break;
-                    case CellType.GroundLights:
-                        break;
-                    case CellType.PoolLight:
-                        break;
-                    case CellType.SpaLight:
-                        break;
+                    switch (i.CellType)
+                    {
+                        case CellType.Pool:
+                            break;
+                        case CellType.Spa:
+                            break;
+                        case CellType.Booster:
+                            break;
+                        case CellType.Heater:
+                            break;
+                        case CellType.GroundLights:
+                            break;
+                        case CellType.PoolLight:
+                            break;
+                        case CellType.SpaLight:
+                            break;
+                    }
                 }
             });
 
 
-        public HomeCellItem(CellType cellType)
-        {
             CellType = cellType;
         }
     }

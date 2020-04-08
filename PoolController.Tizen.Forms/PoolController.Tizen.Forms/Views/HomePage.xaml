@@ -3,12 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PoolController.Tizen.Forms.Views.HomePage">
     <ContentPage.Content>
-        <StackLayout Orientation="Vertical" Padding="0, 20, 0, 0">
-            <ListView x:Name="HomeItemsListview" ItemSelected="OnItemSelected" HorizontalOptions="StartAndExpand">
+        <StackLayout Orientation="Vertical" HeightRequest="1000">
+            <ListView x:Name="HomeItemsListview" HorizontalOptions="StartAndExpand" Margin="0, 40, 0, 40">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout HorizontalOptions="Fill">
+                            <StackLayout HorizontalOptions="Fill" Padding="0, 24, 0, 24">
                                 <Button Command="{Binding ButtonTapCommand}" Text="{Binding Name}" />
                             </StackLayout>
                         </ViewCell>
