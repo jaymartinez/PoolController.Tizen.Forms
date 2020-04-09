@@ -12,26 +12,28 @@ namespace PoolController.Tizen.Forms.Views
 
             var items = new List<HomeCellItem>
             {
+                new HomeCellItem(CellType.Placeholder),
+                new HomeCellItem(CellType.Placeholder),
                 new HomeCellItem(CellType.Pool),
                 new HomeCellItem(CellType.PoolLight),
                 new HomeCellItem(CellType.Spa),
                 new HomeCellItem(CellType.SpaLight),
                 new HomeCellItem(CellType.Booster),
                 new HomeCellItem(CellType.Heater),
-                new HomeCellItem(CellType.GroundLights)
+                new HomeCellItem(CellType.GroundLights),
+                new HomeCellItem(CellType.Placeholder),
+                new HomeCellItem(CellType.Placeholder)
             };
 
             HomeItemsListview.ItemsSource = items;
         }
 
-        public void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
+        private void HomeItemsListview_ItemTapped(object sender, ItemTappedEventArgs e)
         {
-
-        }
-
-        private void Button_Clicked(object sender, System.EventArgs e)
-        {
-
+            if (e.Item is HomeCellItem item)
+            {
+                //stub
+            }
         }
     }
 }
