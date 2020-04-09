@@ -21,9 +21,13 @@ namespace PoolController.Tizen.Forms
         {
             Initialize();
 
-            _poolService = _container.Resolve<IPoolService>();
             var mainPage = new HomePage();
-            MainPage = mainPage;
+
+            Task.Run(async () =>
+            {
+                await mainPage.Page_Init();
+                MainPage = mainPage;
+            });
 
             // The root page of your application
             //MainPage = new ContentPage

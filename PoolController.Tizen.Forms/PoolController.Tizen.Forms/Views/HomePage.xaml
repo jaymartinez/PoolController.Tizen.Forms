@@ -9,7 +9,7 @@
                     <DataTemplate>
                         <ViewCell>
                             <StackLayout HorizontalOptions="Fill" Padding="0, 24, 0, 24">
-                                <Button Text="{Binding Name}" />
+                                <Button Text="{Binding Name}" BackgroundColor="{Binding BackgroundColor}" />
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>
