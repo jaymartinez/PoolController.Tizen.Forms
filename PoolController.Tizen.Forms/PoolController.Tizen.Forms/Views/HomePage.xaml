@@ -8,8 +8,9 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout HorizontalOptions="Fill" Padding="0, 24, 0, 24">
-                                <Button Text="{Binding Name}" BackgroundColor="{Binding BackgroundColor}" />
+                            <StackLayout Orientation="Vertical" VerticalOptions="Fill" Padding="24">
+                                <Button TextColor="{Binding BtnTextColor}" Text="{Binding Name}" BackgroundColor="{Binding BGColor}" />
+                                <Label IsVisible="{Binding IsErrorLabelVisible}" Text="{Binding ErrorText}" TextColor="Red" />
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>

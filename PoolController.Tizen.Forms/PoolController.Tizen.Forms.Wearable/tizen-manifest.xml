@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest package="org.tizen.example.PoolController.Tizen.Forms.Wearable" version="1.0.0" api-version="4" xmlns="http://tizen.org/ns/packages">
+<manifest package="org.tizen.example.PoolController.Tizen.Forms.Wearable" version="1.0.1" api-version="4" xmlns="http://tizen.org/ns/packages">
     <profile name="wearable" />
     <ui-application appid="org.tizen.example.PoolController.Tizen.Forms.Wearable" exec="PoolController.Tizen.Forms.Wearable.dll" multiple="false" nodisplay="false" taskmanage="true" type="dotnet" launch_mode="single">
         <label>PoolController</label>
@@ -8,7 +8,10 @@
         <splash-screens />
     </ui-application>
     <shortcut-list />
+    <privileges>
+        <privilege>http://tizen.org/privilege/internet</privilege>
+        <privilege>http://tizen.org/privilege/externalstorage</privilege>
+    </privileges>
     <provides-appdefined-privileges />
     <feature name="http://tizen.org/feature/network.wifi">true</feature>
-    <feature name="http://tizen.org/feature/input.keyboard">true</feature>
 </manifest>

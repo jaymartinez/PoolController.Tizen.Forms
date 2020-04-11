@@ -4,13 +4,14 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>tizen40</TargetFramework>
     <StartupObject>PoolController.Tizen.Forms.Program</StartupObject>
-    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <SignAssembly>false</SignAssembly>
     <AssemblyOriginatorKeyFile>author.p12</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>portable</DebugType>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>None</DebugType>
@@ -24,6 +25,14 @@
   
   <ItemGroup>
     <ProjectReference Include="..\PoolController.Tizen.Forms\PoolController.Tizen.Forms.csproj" />
+  </ItemGroup>
+
+  
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   
 

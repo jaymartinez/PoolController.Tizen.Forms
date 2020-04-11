@@ -22,24 +22,78 @@ namespace PoolController.Tizen.Forms.Models
         }
 
         Color _backgroundColor;
-        public Color BackgroundColor
+        public Color BGColor
         {
             get => _backgroundColor;
             set
             {
                 _backgroundColor = value;
-                OnPropertyChanged(nameof(BackgroundColor));
+                OnPropertyChanged(nameof(BGColor));
             }
         }
 
-        public HomeCellItem(PiPin pin, CellType cellType)
+        Color _btnTextColor;
+        public Color BtnTextColor
         {
+            get => _btnTextColor;
+            set
+            {
+                _btnTextColor = value;
+                OnPropertyChanged(nameof(BtnTextColor));
+            }
+        }
+
+        bool _isErrorLabelVisible;
+        public bool IsErrorLabelVisible
+        {
+            get => _isErrorLabelVisible;
+            set
+            {
+                _isErrorLabelVisible = value;
+                OnPropertyChanged(nameof(IsErrorLabelVisible));
+            }
+        }
+
+        string _errorText;
+        public string ErrorText
+        {
+            get => _errorText;
+            set
+            {
+                _errorText = value;
+                OnPropertyChanged(nameof(ErrorText));
+            }
+        }
+
+        public HomeCellItem(PiPin pin, CellType cellType, string errorMsg = null)
+        {
+            PiPin = pin;
+            State = pin.State;
             CellType = cellType;
 
-            if (pin != null)
+            if (State == PinState.ON)
             {
-                PiPin = pin;
-                State = pin.State;
+                BGColor = Color.LightGreen;
+                BtnTextColor = Color.DarkBlue;
+            }
+            else
+            {
+                if (CellType != CellType.Placeholder)
+                    BGColor = Color.Default;
+                else
+                    BGColor = Color.Transparent;
+
+                BtnTextColor = Color.White;
+            }
+
+            if (!string.IsNullOrEmpty(errorMsg))
+            {
+                ErrorText = errorMsg;
+                IsErrorLabelVisible = true;
+            }
+            else
+            {
+                IsErrorLabelVisible = false;
             }
         }
     }

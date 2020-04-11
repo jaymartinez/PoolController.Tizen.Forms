@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PoolController.Tizen.Forms"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PoolController.Tizen.Forms.Wearable", "PoolController.Tizen.Forms\PoolController.Tizen.Forms.Wearable\PoolController.Tizen.Forms.Wearable.csproj", "{6B88612C-006C-4773-BF0A-B8B3419C9D80}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eHub.Common", "..\..\eHub.Common\eHub.Service\eHub.Common.csproj", "{9CE431AE-899B-48E9-967E-17BF75B52AF2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eHub.Common", "..\..\eHub.Common\eHub.Service\eHub.Common.csproj", "{DEB38FB7-8609-4F74-9D68-70DED7739CC1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{6B88612C-006C-4773-BF0A-B8B3419C9D80}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6B88612C-006C-4773-BF0A-B8B3419C9D80}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6B88612C-006C-4773-BF0A-B8B3419C9D80}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9CE431AE-899B-48E9-967E-17BF75B52AF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9CE431AE-899B-48E9-967E-17BF75B52AF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9CE431AE-899B-48E9-967E-17BF75B52AF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9CE431AE-899B-48E9-967E-17BF75B52AF2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DEB38FB7-8609-4F74-9D68-70DED7739CC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DEB38FB7-8609-4F74-9D68-70DED7739CC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DEB38FB7-8609-4F74-9D68-70DED7739CC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DEB38FB7-8609-4F74-9D68-70DED7739CC1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
