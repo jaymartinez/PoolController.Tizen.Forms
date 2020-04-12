@@ -86,6 +86,12 @@ namespace PoolController.Tizen.Forms.Models
                 BtnTextColor = Color.White;
             }
 
+            if (CellType == CellType.Refresh)
+            {
+                BGColor = Color.White;
+                BtnTextColor = Color.DarkBlue;
+            }
+
             if (!string.IsNullOrEmpty(errorMsg))
             {
                 ErrorText = errorMsg;
@@ -109,6 +115,7 @@ namespace PoolController.Tizen.Forms.Models
         SpaLight,
         PoolLight,
         About,
-        Placeholder
+        Placeholder,
+        Refresh
     }
 }

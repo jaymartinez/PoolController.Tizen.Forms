@@ -11,18 +11,15 @@ namespace PoolController.Tizen.Forms
         static IContainer _container;
         public IContainer Container => _container;
 
-        IPoolService _poolService;
-
         public App()
         {
             Initialize();
 
-            var mainPage = new HomePage();
-
             Task.Run(async () =>
             {
-                await mainPage.Page_Init();
-                MainPage = mainPage;
+                var homePage = new HomePage();
+                await homePage.Reload();
+                MainPage = homePage;
             });
 
             // The root page of your application

@@ -3,14 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PoolController.Tizen.Forms.Views.HomePage">
     <ContentPage.Content>
-        <StackLayout Orientation="Vertical" HeightRequest="1000">
+        <StackLayout Orientation="Vertical">
+            <Label x:Name="StatusLabel" Margin="0, 24, 0, 0" HorizontalOptions="Center" IsVisible="False" Text="Disconnected!" TextColor="Orange" />
             <ListView x:Name="HomeItemsListview" ItemTapped="HomeItemsListview_ItemTapped" HorizontalOptions="StartAndExpand" Margin="0, 40, 0, 40">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
                             <StackLayout Orientation="Vertical" VerticalOptions="Fill" Padding="24">
                                 <Button TextColor="{Binding BtnTextColor}" Text="{Binding Name}" BackgroundColor="{Binding BGColor}" />
-                                <Label IsVisible="{Binding IsErrorLabelVisible}" Text="{Binding ErrorText}" TextColor="Red" />
+                                <Label IsVisible="{Binding IsErrorLabelVisible}" Text="{Binding ErrorText}" FontSize="Small" TextColor="Red" />
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>

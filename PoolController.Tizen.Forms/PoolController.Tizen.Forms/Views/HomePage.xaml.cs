@@ -13,15 +13,40 @@ namespace PoolController.Tizen.Forms.Views
 	{
         [Inject] IPoolService PoolService { get; set; }
 
-		public HomePage ()
-		{
+        public HomePage()
+        {
             InitializeComponent();
-
             PoolControllerInjector.InjectProperties(this);
         }
 
-        public async Task Page_Init()
+        async void HomeItemsListview_ItemTapped(object sender, ItemTappedEventArgs e)
         {
+            if (e.Item is HomeCellItem item)
+            {
+                if (item.CellType == CellType.Refresh)
+                {
+                    await Reload();
+                }
+            }
+        }
+
+        public async Task Reload()
+        {
+            var aic = new ActivityIndicatorControl();
+            await Navigation.PushModalAsync(aic);
+
+            var pinged = await PoolService.Ping();
+            if (!pinged)
+            {
+                StatusLabel.IsVisible = true;
+                HomeItemsListview.IsVisible = false;
+                await Navigation.PopModalAsync();
+                return;
+            }
+
+            HomeItemsListview.IsVisible = true;
+            StatusLabel.IsVisible = false;
+
             HomeCellItem poolItem = null;
             HomeCellItem spaItem = null;
             HomeCellItem poolLightItem = null;
@@ -29,6 +54,7 @@ namespace PoolController.Tizen.Forms.Views
             HomeCellItem boosterItem = null;
             HomeCellItem heaterItem = null;
             HomeCellItem groundLightsItem = null;
+
             try
             {
                 var poolLight = await GetStatus(Pin.PoolLight);
@@ -96,7 +122,7 @@ namespace PoolController.Tizen.Forms.Views
             var items = new List<HomeCellItem>
             {
                 new HomeCellItem(new PiPin(), CellType.Placeholder),
-                new HomeCellItem(new PiPin(), CellType.Placeholder),
+                new HomeCellItem(new PiPin(), CellType.Refresh),
                 poolItem,
                 poolLightItem,
                 spaItem,
@@ -109,6 +135,7 @@ namespace PoolController.Tizen.Forms.Views
             };
 
             HomeItemsListview.ItemsSource = items;
+            await Navigation.PopModalAsync();
         }
 
         async Task<PiPin> GetStatus(int pin)
@@ -123,12 +150,9 @@ namespace PoolController.Tizen.Forms.Views
             }
         }
 
-        void HomeItemsListview_ItemTapped(object sender, ItemTappedEventArgs e)
+        async void Button_Clicked(object sender, EventArgs e)
         {
-            if (e.Item is HomeCellItem item)
-            {
-                //stub
-            }
+            await Reload();
         }
     }
 }
