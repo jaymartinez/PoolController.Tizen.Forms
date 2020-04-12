@@ -27,6 +27,71 @@ namespace PoolController.Tizen.Forms.Views
                 {
                     await Reload();
                 }
+                else if (item.CellType != CellType.Placeholder)
+                {
+                    var resultStatus = default(PiPin);
+                    switch (item.CellType)
+                    {
+                        case CellType.Pool:
+                            var heaterStatus = await GetStatus(Pin.Heater);
+                            var boosterStatus = await GetStatus(Pin.BoosterPump);
+                            var curPoolState = await GetStatus(Pin.PoolPump);
+
+                            if (curPoolState.State == PinState.ON
+                                && (heaterStatus.State == PinState.ON || boosterStatus.State == PinState.ON))
+                            {
+                                await DisplayAlert("", "The heater and booster must be off first!", "Ok");
+                                return;
+                            }
+                            var onoff = curPoolState.State == PinState.ON ? "OFF" : "ON";
+                            var confirm = await DisplayAlert("You Sure?", $"Turn it {onoff} ?", "Yes", "No");
+                            if (confirm)
+                            {
+                                resultStatus = await PoolService.Toggle(Pin.PoolPump);
+                            }
+                            else return;
+                            break;
+                        case CellType.PoolLight:
+                            resultStatus = await PoolService.Toggle(Pin.PoolLight);
+                            break;
+                        case CellType.SpaLight:
+                            resultStatus = await PoolService.Toggle(Pin.SpaLight);
+                            break;
+                        case CellType.GroundLights:
+                            resultStatus = await PoolService.Toggle(Pin.GroundLights);
+                            break;
+                        case CellType.Spa:
+                            resultStatus = await PoolService.Toggle(Pin.SpaPump);
+                            break;
+                        case CellType.Heater:
+                            heaterStatus = await GetStatus(Pin.Heater);
+                            curPoolState = await GetStatus(Pin.PoolPump);
+
+                            // Make sure the pool pump is on first!
+                            if (heaterStatus.State == PinState.OFF && curPoolState.State == PinState.OFF)
+                            {
+                                await DisplayAlert("Wait!", "The pool pump needs to be on first!", "Ok");
+                                return;
+                            }
+
+                            resultStatus = await PoolService.Toggle(Pin.Heater);
+                            break;
+                        case CellType.Booster:
+                            boosterStatus = await GetStatus(Pin.BoosterPump);
+                            curPoolState = await GetStatus(Pin.PoolPump);
+                            if (boosterStatus.State == PinState.OFF && curPoolState.State == PinState.OFF)
+                            {
+                                await DisplayAlert("Wait!", "The pool pump needs to be on first!", "Ok");
+                                return;
+                            }
+
+                            resultStatus = await PoolService.Toggle(Pin.BoosterPump);
+                            break;
+                    }
+
+                    if (resultStatus != null)
+                        item.State = resultStatus.State;
+                }
             }
         }
 

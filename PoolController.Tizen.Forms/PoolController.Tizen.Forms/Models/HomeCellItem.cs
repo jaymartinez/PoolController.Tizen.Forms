@@ -17,6 +17,22 @@ namespace PoolController.Tizen.Forms.Models
             set
             {
                 _state = value;
+
+                if (_state == PinState.ON)
+                {
+                    BGColor = Color.LightGreen;
+                    BtnTextColor = Color.DarkBlue;
+                }
+                else
+                {
+                    if (CellType != CellType.Placeholder)
+                        BGColor = Color.Default;
+                    else
+                        BGColor = Color.Transparent;
+
+                    BtnTextColor = Color.White;
+                }
+
                 OnPropertyChanged(nameof(State));
             }
         }
@@ -70,21 +86,6 @@ namespace PoolController.Tizen.Forms.Models
             PiPin = pin;
             State = pin.State;
             CellType = cellType;
-
-            if (State == PinState.ON)
-            {
-                BGColor = Color.LightGreen;
-                BtnTextColor = Color.DarkBlue;
-            }
-            else
-            {
-                if (CellType != CellType.Placeholder)
-                    BGColor = Color.Default;
-                else
-                    BGColor = Color.Transparent;
-
-                BtnTextColor = Color.White;
-            }
 
             if (CellType == CellType.Refresh)
             {
