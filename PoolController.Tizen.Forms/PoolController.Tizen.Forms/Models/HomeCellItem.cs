@@ -8,7 +8,7 @@ namespace PoolController.Tizen.Forms.Models
         public CellType CellType { get; }
         public PiPin PiPin { get; }
 
-        public string Name { get => CellType == CellType.Placeholder ? "" : CellType.ToString(); }
+        public string Name { get => CellType.ToString(); }
 
         int _state;
         public int State
@@ -25,11 +25,7 @@ namespace PoolController.Tizen.Forms.Models
                 }
                 else
                 {
-                    if (CellType != CellType.Placeholder)
-                        BGColor = Color.Default;
-                    else
-                        BGColor = Color.Transparent;
-
+                    BGColor = Color.Default;
                     BtnTextColor = Color.White;
                 }
 
@@ -116,7 +112,6 @@ namespace PoolController.Tizen.Forms.Models
         SpaLight,
         PoolLight,
         About,
-        Placeholder,
         Refresh
     }
 }

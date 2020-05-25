@@ -3,6 +3,7 @@ using eHub.Common.Services;
 using PoolController.Tizen.Forms.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -17,6 +18,7 @@ namespace PoolController.Tizen.Forms.Views
         {
             InitializeComponent();
             PoolControllerInjector.InjectProperties(this);
+
         }
 
         async void HomeItemsListview_ItemTapped(object sender, ItemTappedEventArgs e)
@@ -27,7 +29,7 @@ namespace PoolController.Tizen.Forms.Views
                 {
                     await Reload();
                 }
-                else if (item.CellType != CellType.Placeholder)
+                else
                 {
                     var resultStatus = default(PiPin);
                     switch (item.CellType)
@@ -186,7 +188,6 @@ namespace PoolController.Tizen.Forms.Views
 
             var items = new List<HomeCellItem>
             {
-                new HomeCellItem(new PiPin(), CellType.Placeholder),
                 new HomeCellItem(new PiPin(), CellType.Refresh),
                 poolItem,
                 poolLightItem,
@@ -194,12 +195,29 @@ namespace PoolController.Tizen.Forms.Views
                 spaLightItem,
                 boosterItem,
                 heaterItem,
-                groundLightsItem,
-                new HomeCellItem(new PiPin(), CellType.Placeholder),
-                new HomeCellItem(new PiPin(), CellType.Placeholder)
+                groundLightsItem
             };
 
             HomeItemsListview.ItemsSource = items;
+
+            var sched = await PoolService.GetSchedule();
+
+            if (sched != null)
+            {
+                var start = new TimeSpan(sched.StartHour, sched.StartMinute, 0);
+                var end = new TimeSpan(sched.EndHour, sched.EndMinute, 0);
+
+                //var timerModel = new TimerViewModel();
+                StartTime.Time = start;//BindingContext = timerModel;
+                EndTime.Time = end;//BindingContext = timerModel;
+                //timerModel.TimerStartTime = start;
+                //timerModel.TimerEndTime = end;
+
+                PoolTimerSwitch.IsToggled = sched.IsActive;
+                //PoolTimerSwitch.BindingContext = sched;
+                //OnPropertyChanged(nameof(sched.IsActive));
+            }
+
             await Navigation.PopModalAsync();
         }
 
@@ -215,9 +233,76 @@ namespace PoolController.Tizen.Forms.Views
             }
         }
 
-        async void Button_Clicked(object sender, EventArgs e)
+        async void StartTime_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            await Reload();
+            if (e.PropertyName ==  "Time")
+            {
+                var startPicker = sender as TimePicker;
+                if (startPicker == null)
+                    return;
+
+                var st = startPicker.Time;
+                var et = EndTime.Time;
+                var active = PoolTimerSwitch.IsToggled;
+
+                await SaveSchedule(st, et, active);
+            }
+        }
+
+        async void EndTime_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "Time")
+            {
+                var endPicker = sender as TimePicker;
+                if (endPicker == null)
+                    return;
+
+                var et = endPicker.Time;
+                var st = StartTime.Time;
+                var active = PoolTimerSwitch.IsToggled;
+
+                await SaveSchedule(st, et, active);
+            }
+        }
+
+        async Task SaveSchedule(TimeSpan start, TimeSpan end, bool active)
+        {
+            var s = new DateTime(DateTime.Now.Year,
+                DateTime.Now.Month,
+                DateTime.Now.Day,
+                start.Hours,
+                start.Minutes,
+                0);
+
+            var e = new DateTime(DateTime.Now.Year,
+                DateTime.Now.Month,
+                DateTime.Now.Day,
+                end.Hours,
+                end.Minutes,
+                0);
+
+            var result = await PoolService.SetSchedule(s, e, active);
+            if (result == null)
+            {
+                // If save was unsuccessful then reload the page to get correct values.
+                await Reload();
+            }
+        }
+
+        async void PoolTimerSwitch_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "IsToggled")
+            {
+                var sw = sender as Switch;
+                if (sw == null)
+                    return;
+
+                var active = sw.IsToggled;
+                var st = StartTime.Time;
+                var et = EndTime.Time;
+
+                await SaveSchedule(st, et, active);
+            }
         }
     }
 }
